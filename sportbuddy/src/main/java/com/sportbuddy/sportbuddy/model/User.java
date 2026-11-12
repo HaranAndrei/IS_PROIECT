@@ -67,3 +67,5 @@ public class User {
         this.rating = rating;
     }
 }
+
+///am fost aici
