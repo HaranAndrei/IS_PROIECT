@@ -1,0 +1,30 @@
+### Creare utilizator
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "name": "Maria",
+  "email": "maria@example.com",
+  "password": "parola456"
+}
+### Creare teren
+POST http://localhost:8080/api/fields
+Content-Type: application/json
+
+{
+  "name": "Teren Central",
+  "sport": "baschet",
+  "address": "Strada Principala 10",
+  "latitude": 44.4268,
+  "longitude": 26.1025
+}
+
+### Afisare terenuri
+GET http://localhost:8080/api/fields
+
+### Filtrare dupa sport
+GET http://localhost:8080/api/fields/sport/baschet
+
+
+### Afisare utilizatori
+GET http://localhost:8080/api/users

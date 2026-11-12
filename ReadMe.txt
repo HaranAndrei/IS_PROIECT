@@ -68,3 +68,7 @@ prototip UI;
 aplicația funcțională;
 plan și rezultate de testare;
 documentație finală și prezentare.
+
+
+SOLID
+DESIGN PATTERNS
