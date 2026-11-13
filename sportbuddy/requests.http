@@ -19,6 +19,29 @@ Content-Type: application/json
   "longitude": 26.1025
 }
 
+### Creare meci
+POST http://localhost:8080/api/matches
+Content-Type: application/json
+
+{
+  "sport": "baschet",
+  "startTime": "2026-11-15T18:00:00",
+  "maxPlayers": 10,
+  "playersNeeded": 4,
+  "creator": {
+    "id": 1
+  },
+  "field": {
+    "id": 1
+  }
+}
+
+### Afisare meciuri
+GET http://localhost:8080/api/matches
+
+### Filtrare meciuri
+GET http://localhost:8080/api/matches/sport/baschet
+
 ### Afisare terenuri
 GET http://localhost:8080/api/fields
 
