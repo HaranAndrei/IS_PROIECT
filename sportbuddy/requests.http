@@ -51,3 +51,9 @@ GET http://localhost:8080/api/fields/sport/baschet
 
 ### Afisare utilizatori
 GET http://localhost:8080/api/users
+
+### Inscriere utilizator la meci
+POST http://localhost:8080/api/matches/1/participants/1
+
+### Afisare participanti
+GET http://localhost:8080/api/matches/1/participants
