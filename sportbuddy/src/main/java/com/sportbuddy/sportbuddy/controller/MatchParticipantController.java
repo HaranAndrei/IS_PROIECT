@@ -2,6 +2,9 @@ package com.sportbuddy.sportbuddy.controller;
 
 import com.sportbuddy.sportbuddy.model.MatchParticipant;
 import com.sportbuddy.sportbuddy.service.MatchParticipantService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,12 +20,22 @@ public class MatchParticipantController {
         this.participantService = participantService;
     }
 
-    @PostMapping("/{matchId}/participants/{userId}")
+    @PostMapping("/{matchId}/participants/me")
     public MatchParticipant joinMatch(
             @PathVariable Long matchId,
-            @PathVariable Long userId) {
+            @AuthenticationPrincipal Jwt principal) {
 
-        return participantService.joinMatch(userId, matchId);
+        return participantService.joinMatch(Long.valueOf(principal.getSubject()), matchId);
+    }
+
+    @DeleteMapping("/{matchId}/participants/me")
+    public ResponseEntity<Void> leaveMatch(
+            @PathVariable Long matchId,
+            @AuthenticationPrincipal Jwt principal) {
+        if (participantService.leaveMatch(Long.valueOf(principal.getSubject()), matchId)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/{matchId}/participants")

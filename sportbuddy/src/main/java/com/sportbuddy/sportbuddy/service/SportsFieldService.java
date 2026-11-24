@@ -1,5 +1,6 @@
 package com.sportbuddy.sportbuddy.service;
 
+import com.sportbuddy.sportbuddy.dto.CreateSportsFieldRequest;
 import com.sportbuddy.sportbuddy.model.SportsField;
 import com.sportbuddy.sportbuddy.repository.SportsFieldRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,9 @@ public class SportsFieldService {
         this.sportsFieldRepository = sportsFieldRepository;
     }
 
-    public SportsField createField(SportsField sportsField) {
+    public SportsField createField(CreateSportsFieldRequest request) {
+        SportsField sportsField = new SportsField(request.name(), request.sport(), request.address(),
+                request.latitude().doubleValue(), request.longitude().doubleValue());
         return sportsFieldRepository.save(sportsField);
     }
 

@@ -7,6 +7,18 @@ Content-Type: application/json
   "email": "maria@example.com",
   "password": "parola456"
 }
+
+### Autentificare cu utilizatorul de test
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "maria@example.com",
+  "password": "parola456"
+}
+
+> {% client.global.set("accessToken", response.body.accessToken); %}
+
 ### Creare teren
 POST http://localhost:8080/api/fields
 Content-Type: application/json
@@ -22,15 +34,13 @@ Content-Type: application/json
 ### Creare meci
 POST http://localhost:8080/api/matches
 Content-Type: application/json
+Authorization: Bearer {{accessToken}}
 
 {
   "sport": "baschet",
   "startTime": "2026-11-15T18:00:00",
   "maxPlayers": 10,
   "playersNeeded": 4,
-  "creator": {
-    "id": 1
-  },
   "field": {
     "id": 1
   }
@@ -38,6 +48,19 @@ Content-Type: application/json
 
 ### Afisare meciuri
 GET http://localhost:8080/api/matches
+
+### Modificare meci
+PUT http://localhost:8080/api/matches/1
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "sport": "baschet",
+  "startTime": "2026-12-10T19:30:00",
+  "maxPlayers": 12,
+  "playersNeeded": 6,
+  "fieldId": 1
+}
 
 ### Filtrare meciuri
 GET http://localhost:8080/api/matches/sport/baschet
@@ -53,7 +76,19 @@ GET http://localhost:8080/api/fields/sport/baschet
 GET http://localhost:8080/api/users
 
 ### Inscriere utilizator la meci
-POST http://localhost:8080/api/matches/1/participants/1
+POST http://localhost:8080/api/matches/1/participants/me
+Authorization: Bearer {{accessToken}}
 
 ### Afisare participanti
 GET http://localhost:8080/api/matches/1/participants
+
+### Anulare inscriere la meci
+DELETE http://localhost:8080/api/matches/1/participants/me
+Authorization: Bearer {{accessToken}}
+
+### Verificare locuri disponibile la meci
+GET http://localhost:8080/api/matches/1/availability
+
+### Stergere meci si inscrierile aferente
+DELETE http://localhost:8080/api/matches/{{matchIdToDelete}}
+Authorization: Bearer {{accessToken}}

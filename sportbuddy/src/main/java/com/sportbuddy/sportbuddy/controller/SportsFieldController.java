@@ -1,7 +1,9 @@
 package com.sportbuddy.sportbuddy.controller;
 
+import com.sportbuddy.sportbuddy.dto.CreateSportsFieldRequest;
 import com.sportbuddy.sportbuddy.model.SportsField;
 import com.sportbuddy.sportbuddy.service.SportsFieldService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +19,8 @@ public class SportsFieldController {
     }
 
     @PostMapping
-    public SportsField createField(@RequestBody SportsField sportsField) {
-        return sportsFieldService.createField(sportsField);
+    public SportsField createField(@Valid @RequestBody CreateSportsFieldRequest request) {
+        return sportsFieldService.createField(request);
     }
 
     @GetMapping

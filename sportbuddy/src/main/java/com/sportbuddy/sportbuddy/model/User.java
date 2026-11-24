@@ -20,15 +20,17 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    private Boolean passwordEncoded;
+
     private double rating = 5.0;
 
     public User() {
     }
 
-    public User(String name, String email, String password) {
+    public User(String name, String email, String passwordHash) {
         this.name = name;
         this.email = email;
-        this.password = password;
+        updatePasswordHash(passwordHash);
     }
 
     public Long getId() {
@@ -55,8 +57,13 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public boolean hasPasswordHash() {
+        return Boolean.TRUE.equals(passwordEncoded);
+    }
+
+    public void updatePasswordHash(String passwordHash) {
+        this.password = passwordHash;
+        this.passwordEncoded = true;
     }
 
     public double getRating() {

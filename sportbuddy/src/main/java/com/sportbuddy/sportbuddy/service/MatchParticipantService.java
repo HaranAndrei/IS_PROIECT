@@ -6,7 +6,10 @@ import com.sportbuddy.sportbuddy.model.User;
 import com.sportbuddy.sportbuddy.repository.MatchParticipantRepository;
 import com.sportbuddy.sportbuddy.repository.MatchRepository;
 import com.sportbuddy.sportbuddy.repository.UserRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -27,24 +30,25 @@ public class MatchParticipantService {
         this.matchRepository = matchRepository;
     }
 
+    @Transactional
     public MatchParticipant joinMatch(Long userId, Long matchId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException(
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Utilizatorul nu exista: " + userId));
 
-        Match match = matchRepository.findById(matchId)
-                .orElseThrow(() -> new IllegalArgumentException(
+        Match match = matchRepository.findByIdForUpdate(matchId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Meciul nu exista: " + matchId));
 
         if (participantRepository.existsByUserIdAndMatchId(userId, matchId)) {
-            throw new IllegalStateException(
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
                     "Utilizatorul este deja inscris la acest meci");
         }
 
         long currentParticipants = participantRepository.countByMatchId(matchId);
 
         if (currentParticipants >= match.getMaxPlayers()) {
-            throw new IllegalStateException(
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
                     "Meciul nu mai are locuri disponibile");
         }
 
@@ -52,7 +56,15 @@ public class MatchParticipantService {
         return participantRepository.save(participant);
     }
 
+    @Transactional
+    public boolean leaveMatch(Long userId, Long matchId) {
+        return participantRepository.deleteByUserIdAndMatchId(userId, matchId) > 0;
+    }
+
     public List<MatchParticipant> getParticipants(Long matchId) {
+        if (!matchRepository.existsById(matchId)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Meciul nu exista: " + matchId);
+        }
         return participantRepository.findByMatchId(matchId);
     }
 }
