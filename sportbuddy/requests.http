@@ -19,6 +19,10 @@ Content-Type: application/json
 
 > {% client.global.set("accessToken", response.body.accessToken); %}
 
+### Contul autentificat
+GET http://localhost:8080/api/me
+Authorization: Bearer {{accessToken}}
+
 ### Creare teren
 POST http://localhost:8080/api/fields
 Content-Type: application/json

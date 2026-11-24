@@ -36,6 +36,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(access -> access
+                        .requestMatchers(HttpMethod.GET, "/api/me", "/api/matches/overview").authenticated()
                         .requestMatchers(HttpMethod.POST, "/api/matches", "/api/matches/{matchId}/participants/me")
                         .authenticated()
                         .requestMatchers(HttpMethod.PUT, "/api/matches/{matchId}").authenticated()

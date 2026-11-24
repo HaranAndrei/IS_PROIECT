@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#151820">
+    <title>SportBuddy | Meciuri</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/matches.css">
+    <script type="module" src="/matches.js"></script>
+</head>
+<body class="matches-page">
+    <header class="matches-header">
+        <div class="matches-header-inner">
+            <div class="brand">
+                <span class="brand-mark" aria-hidden="true"></span>
+                <span>SportBuddy</span>
+            </div>
+            <div class="signed-in">
+                <div class="signed-in-details" id="signed-in-details" hidden>
+                    <strong id="account-name"></strong>
+                    <span id="account-email"></span>
+                </div>
+                <button type="button" class="secondary" id="sign-out">Deconectează-te</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="matches-main">
+        <nav class="app-navigation" aria-label="Navigare SportBuddy">
+            <a href="/matches.html" aria-current="page">Meciuri</a>
+            <a href="/map.html">Hartă terenuri</a>
+        </nav>
+        <h1>Meciuri</h1>
+        <div class="matches-message" id="matches-message">
+            <p id="matches-status" role="status">Se încarcă meciurile…</p>
+            <button type="button" class="secondary" id="retry-matches" hidden>Încearcă din nou</button>
+        </div>
+        <ul class="match-list" id="match-list" hidden></ul>
+    </main>
+
+    <template id="match-template">
+        <li class="match-card">
+            <h2 class="match-sport"></h2>
+            <dl class="match-details">
+                <div>
+                    <dt>Teren</dt>
+                    <dd class="match-field"></dd>
+                </div>
+                <div>
+                    <dt>Data și ora</dt>
+                    <dd><time class="match-start"></time></dd>
+                </div>
+                <div class="match-availability">
+                    <dt>Locuri libere</dt>
+                    <dd><strong class="match-spots"></strong> <span class="match-capacity"></span></dd>
+                </div>
+            </dl>
+        </li>
+    </template>
+</body>
+</html>

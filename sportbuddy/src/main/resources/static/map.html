@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#151820">
+    <title>SportBuddy | Hartă terenuri</title>
+    <link rel="stylesheet" href="/vendor/leaflet/leaflet.css">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/matches.css">
+    <link rel="stylesheet" href="/map.css">
+    <script src="/vendor/leaflet/leaflet.js" defer></script>
+    <script type="module" src="/map.js"></script>
+</head>
+<body class="matches-page">
+    <header class="matches-header">
+        <div class="matches-header-inner">
+            <div class="brand">
+                <span class="brand-mark" aria-hidden="true"></span>
+                <span>SportBuddy</span>
+            </div>
+            <div class="signed-in">
+                <div class="signed-in-details" id="map-account" hidden>
+                    <strong id="account-name"></strong>
+                    <span id="account-email"></span>
+                </div>
+                <button type="button" class="secondary" id="sign-out">Deconectează-te</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="matches-main map-main">
+        <nav class="app-navigation" aria-label="Navigare SportBuddy">
+            <a href="/matches.html">Meciuri</a>
+            <a href="/map.html" aria-current="page">Hartă terenuri</a>
+        </nav>
+        <h1>Terenuri în Cluj-Napoca</h1>
+        <div class="sport-filters" role="group" aria-label="Filtrează terenurile după sport" id="sport-filters" hidden>
+            <button type="button" data-sport="all" aria-pressed="true">Toate</button>
+            <button type="button" data-sport="baschet" aria-pressed="false">Baschet</button>
+            <button type="button" data-sport="fotbal" aria-pressed="false">Fotbal</button>
+            <button type="button" data-sport="tenis" aria-pressed="false">Tenis</button>
+        </div>
+
+        <div class="court-layout">
+            <div class="map-panel" id="map-panel" hidden>
+                <div id="courts-map" aria-label="Hartă interactivă a terenurilor din Cluj-Napoca" role="region"></div>
+                <p id="tile-status" class="tile-status" role="status" hidden></p>
+            </div>
+            <section class="court-sidebar" aria-labelledby="court-list-title">
+                <h2 id="court-list-title">Terenuri</h2>
+                <p id="court-status" role="status">Se încarcă terenurile…</p>
+                <ul id="court-list" class="court-list" role="list"></ul>
+                <button type="button" class="secondary" id="retry-map" hidden>Încearcă din nou</button>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

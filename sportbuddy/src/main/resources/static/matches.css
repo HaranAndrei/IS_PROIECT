@@ -1,0 +1,123 @@
+.matches-page {
+    min-height: 100svh;
+    background: radial-gradient(ellipse at 20% 0%, #2b242a, transparent 42rem), #151820;
+}
+
+.matches-header {
+    border-bottom: 1px solid #f8f4ea20;
+    background: #10131a;
+}
+
+.matches-header-inner, .matches-main {
+    width: min(100% - 2rem, 1100px);
+    margin-inline: auto;
+}
+
+.matches-header-inner, .signed-in {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.matches-header-inner {
+    justify-content: space-between;
+    min-height: 72px;
+    padding-block: .85rem;
+}
+
+.matches-header .brand { margin: 0; }
+.matches-header .brand-mark { flex: 0 0 2.14rem; }
+
+.signed-in-details { display: grid; gap: .2rem; }
+.signed-in-details strong, .signed-in-details span { overflow-wrap: anywhere; }
+.signed-in-details span { color: var(--muted); font-size: .9rem; }
+.signed-in button { flex-shrink: 0; }
+
+.matches-main {
+    padding-block: clamp(2rem, 6vw, 4.6rem);
+}
+
+.app-navigation {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-bottom: 1.3rem;
+}
+
+.app-navigation a {
+    padding: .6rem .8rem;
+    border: 1px solid transparent;
+    border-radius: .65rem;
+    color: var(--muted);
+    font-size: .93rem;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.app-navigation a:hover { color: white; }
+.app-navigation a[aria-current="page"] {
+    border-color: #ffbf7740;
+    color: var(--accent);
+    background: #ffbf7714;
+}
+
+.matches-main h1 {
+    margin-bottom: 1.6rem;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+}
+
+.matches-message, .match-card {
+    border: 1px solid #f8f4ea24;
+    border-radius: 1rem;
+    background: #1d2029;
+}
+
+.matches-message { padding: 1.35rem; }
+.matches-message p { margin: 0; color: var(--muted); line-height: 1.45; }
+.matches-message button { margin-top: 1rem; }
+
+.match-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.match-card {
+    min-width: 0;
+    padding: 1.25rem;
+    border-top: 2px solid #b67d51;
+}
+
+.match-sport {
+    margin: 0 0 1rem;
+    font-size: 1.55rem;
+    line-height: 1.1;
+    letter-spacing: -.028em;
+    text-transform: capitalize;
+    overflow-wrap: anywhere;
+}
+
+.match-details { display: grid; gap: .9rem; margin: 0; }
+.match-details dt { margin-bottom: .25rem; color: var(--muted); font-size: .9rem; }
+.match-details dd { margin: 0; overflow-wrap: anywhere; }
+
+.match-availability {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: .5rem;
+    padding-top: .85rem;
+    border-top: 1px solid #f8f4ea20;
+}
+
+.match-spots { color: var(--accent); font-size: 1.3rem; }
+.match-capacity { color: var(--muted); font-size: .9rem; }
+.match-availability[data-full="true"] .match-spots { color: #ffaca7; }
+
+@media (max-width: 560px) {
+    .matches-header-inner { flex-wrap: wrap; row-gap: .7rem; }
+    .signed-in { width: 100%; justify-content: space-between; }
+}

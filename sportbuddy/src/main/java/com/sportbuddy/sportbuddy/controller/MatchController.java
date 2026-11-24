@@ -2,6 +2,7 @@ package com.sportbuddy.sportbuddy.controller;
 
 import com.sportbuddy.sportbuddy.dto.CreateMatchRequest;
 import com.sportbuddy.sportbuddy.dto.MatchAvailabilityResponse;
+import com.sportbuddy.sportbuddy.dto.MatchOverviewResponse;
 import com.sportbuddy.sportbuddy.dto.UpdateMatchRequest;
 import com.sportbuddy.sportbuddy.model.Match;
 import com.sportbuddy.sportbuddy.service.MatchService;
@@ -43,6 +44,11 @@ public class MatchController {
     @GetMapping
     public List<Match> getAllMatches() {
         return matchService.getAllMatches();
+    }
+
+    @GetMapping("/overview")
+    public List<MatchOverviewResponse> getMatchOverview() {
+        return matchService.getMatchOverview();
     }
 
     @GetMapping("/sport/{sport}")

@@ -1,0 +1,182 @@
+:root {
+    color-scheme: dark;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    font-synthesis: none;
+    color: #f8f6f2;
+    background: #151820;
+    --accent: #ffbf77;
+    --line: #424750;
+    --muted: #bfc5cf;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: wait; opacity: .68; }
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+.layout {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 100svh;
+    padding: clamp(2.8rem, 6vh, 4.5rem) clamp(.85rem, 4vw, 2rem);
+    background: linear-gradient(180deg, #0c111925 0%, #0c111969 60%, #0c1119aa 100%),
+                #151820 url("/basketball-court.jpg") center / cover no-repeat;
+}
+
+.account {
+    width: min(100%, 450px);
+    padding: clamp(1.35rem, 4.8vw, 2.45rem);
+    border: 1px solid #f8f4ea26;
+    border-radius: 1.55rem;
+    background: #151820f0;
+    box-shadow: 0 1.5rem 4.5rem #080b1266, inset 0 1px #fff7e218;
+    backdrop-filter: blur(16px);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    margin-bottom: 1.6rem;
+    font-size: 1.29rem;
+    font-weight: 750;
+    letter-spacing: -.04em;
+}
+
+.brand-mark {
+    display: grid;
+    place-items: center;
+    width: 2.14rem;
+    aspect-ratio: 1;
+    border-radius: .67rem;
+    background: var(--accent);
+}
+
+.brand-mark::before {
+    content: "";
+    width: 1.2rem;
+    height: 1.2rem;
+    border: 1.5px solid #222028;
+    border-radius: 50%;
+    background: linear-gradient(90deg, transparent 46%, #222028 46% 54%, transparent 54%);
+    transform: rotate(34deg);
+}
+
+.mode-control {
+    display: flex;
+    gap: .25rem;
+    padding: .25rem;
+    margin-bottom: 1.55rem;
+    border: 1px solid #f5f1e71c;
+    border-radius: .83rem;
+    background: #0f1219;
+}
+
+.mode-control button {
+    flex: 1;
+    min-width: 0;
+    padding: .62rem .25rem;
+    border: 1px solid transparent;
+    border-radius: .58rem;
+    color: var(--muted);
+    background: transparent;
+    font-size: .9rem;
+    font-weight: 650;
+}
+
+.mode-control button:hover:not(:disabled) { color: white; }
+.mode-control button[aria-pressed="true"] {
+    border-color: #ffd09b26;
+    color: var(--accent);
+    background: #29252a;
+}
+
+h1 {
+    margin: 0 0 1.3rem;
+    font-size: clamp(1.85rem, 5.4vw, 2.75rem);
+    font-weight: 750;
+    letter-spacing: -.052em;
+    line-height: 1.04;
+}
+
+form { display: grid; gap: .87rem; }
+.field { display: grid; gap: .4rem; min-width: 0; }
+label { font-size: .925rem; font-weight: 650; }
+
+input {
+    width: 100%;
+    min-height: 3.06rem;
+    padding: .65rem .82rem;
+    border: 1px solid var(--line);
+    border-radius: .7rem;
+    color: inherit;
+    background: #10131a;
+}
+
+input::placeholder { color: #a0a8b7; }
+.password-field { position: relative; }
+.password-field input { padding-right: 6.1rem; }
+
+.password-field button {
+    position: absolute;
+    top: .3rem;
+    right: .3rem;
+    bottom: .3rem;
+    min-width: 4.55rem;
+    padding: .3rem .55rem;
+    border: 0;
+    border-radius: .45rem;
+    color: #f4d1ab;
+    background: #28252c;
+    font-size: .875rem;
+    font-weight: 650;
+}
+
+.password-field button:hover { background: #39313a; }
+
+.primary, .secondary {
+    min-height: 3.1rem;
+    border: 1px solid transparent;
+    border-radius: .72rem;
+    font-weight: 700;
+}
+
+.primary {
+    margin-top: .2rem;
+    color: #20160e;
+    background: linear-gradient(110deg, #ffc985, #ffa95e);
+}
+
+.primary:hover:not(:disabled) { background: #ffd09b; }
+.secondary { padding: .7rem 1rem; border-color: var(--line); color: var(--accent); background: #10131a; }
+.secondary:hover { border-color: var(--accent); }
+
+.notice { margin: 0; color: #ffb8ac; font-size: .93rem; line-height: 1.42; overflow-wrap: anywhere; }
+.notice:empty { position: absolute; }
+
+.photo-credit {
+    position: absolute;
+    right: clamp(.85rem, 4vw, 2rem);
+    bottom: .9rem;
+    font-size: .8125rem;
+}
+
+.photo-credit a {
+    color: #f8f6f2;
+    text-decoration-color: #f8f6f288;
+    text-underline-offset: .17em;
+    text-shadow: 0 1px 3px #0c1119;
+}
+
+@media (max-width: 600px) {
+    .layout { background-position: center, 53% center; }
+    .account { border-radius: 1.25rem; }
+}

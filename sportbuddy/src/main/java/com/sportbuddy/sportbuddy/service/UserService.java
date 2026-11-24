@@ -1,6 +1,7 @@
 package com.sportbuddy.sportbuddy.service;
 
 import com.sportbuddy.sportbuddy.dto.CreateUserRequest;
+import com.sportbuddy.sportbuddy.dto.CurrentUserResponse;
 import com.sportbuddy.sportbuddy.model.User;
 import com.sportbuddy.sportbuddy.repository.UserRepository;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -36,5 +37,11 @@ public class UserService {
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public CurrentUserResponse getCurrentUser(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilizatorul nu exista"));
+        return new CurrentUserResponse(user.getId(), user.getName(), user.getEmail());
     }
 }

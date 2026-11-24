@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ro">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#151820">
+    <title>SportBuddy | Contul tău</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script type="module" src="/auth.js"></script>
+</head>
+<body>
+    <main class="layout">
+        <div class="account">
+            <header class="brand">
+                <span class="brand-mark" aria-hidden="true"></span>
+                <span>SportBuddy</span>
+            </header>
+
+            <div class="content">
+                <section id="auth-panel" aria-labelledby="auth-title">
+                    <div class="mode-control" role="group" aria-label="Acces la cont">
+                        <button type="button" id="login-mode" aria-pressed="true">Autentificare</button>
+                        <button type="button" id="register-mode" aria-pressed="false">Înregistrare</button>
+                    </div>
+                    <h1 id="auth-title">Intră în cont</h1>
+
+                    <form id="auth-form" method="post">
+                        <div class="field" id="name-field" hidden>
+                            <label for="name">Nume</label>
+                            <input id="name" name="name" type="text" autocomplete="name" maxlength="255" disabled>
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" autocomplete="username"
+                                   placeholder="nume@exemplu.ro" maxlength="255" required>
+                        </div>
+                        <div class="field">
+                            <label for="password">Parolă</label>
+                            <div class="password-field">
+                                <input id="password" name="password" type="password"
+                                       autocomplete="current-password" maxlength="255" required>
+                                <button type="button" id="toggle-password" aria-controls="password">Afișează</button>
+                            </div>
+                        </div>
+
+                        <p id="auth-notice" class="notice" role="status"></p>
+                        <button class="primary" id="auth-submit" type="submit">Autentifică-te</button>
+                    </form>
+                    <noscript><p class="notice">Activează JavaScript pentru a te autentifica.</p></noscript>
+                </section>
+
+            </div>
+        </div>
+
+        <footer class="photo-credit">
+            <a href="https://www.pexels.com/photo/an-empty-basketball-court-2891884/">Foto: Tom Jackson / Pexels</a>
+        </footer>
+    </main>
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.sportbuddy.sportbuddy.service;
 
 import com.sportbuddy.sportbuddy.dto.CreateMatchRequest;
 import com.sportbuddy.sportbuddy.dto.MatchAvailabilityResponse;
+import com.sportbuddy.sportbuddy.dto.MatchOverviewResponse;
 import com.sportbuddy.sportbuddy.dto.UpdateMatchRequest;
 import com.sportbuddy.sportbuddy.model.Match;
 import com.sportbuddy.sportbuddy.model.SportsField;
@@ -75,6 +76,10 @@ public class MatchService {
 
     public List<Match> getAllMatches() {
         return matchRepository.findAll();
+    }
+
+    public List<MatchOverviewResponse> getMatchOverview() {
+        return matchRepository.findMatchOverview();
     }
 
     public List<Match> getMatchesBySport(String sport) {
