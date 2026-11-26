@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -39,6 +40,10 @@ public class MatchParticipantService {
         Match match = matchRepository.findByIdForUpdate(matchId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Meciul nu exista: " + matchId));
+
+        if (!match.getStartTime().isAfter(LocalDateTime.now(ClujCourtCatalog.ZONE))) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Meciul a inceput deja");
+        }
 
         if (participantRepository.existsByUserIdAndMatchId(userId, matchId)) {
             throw new ResponseStatusException(HttpStatus.CONFLICT,

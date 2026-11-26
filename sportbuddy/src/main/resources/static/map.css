@@ -1,20 +1,70 @@
-.map-main h1 {
-    font-size: clamp(2rem, 5vw, 3.6rem);
-    margin-bottom: 1.3rem;
+.map-page { display: flex; flex-direction: column; }
+
+.map-main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: min(100% - 2rem, 108rem);
+    padding: 1.15rem 0 1rem;
+}
+
+.map-main .app-navigation { margin-bottom: .85rem; }
+
+.map-panel {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    min-height: 30rem;
+    overflow: hidden;
+    isolation: isolate;
+    border: 1px solid #f8f4ea24;
+    border-radius: 1rem;
+    background: #182128;
+}
+
+#courts-map {
+    position: absolute;
+    inset: 0;
+    isolation: isolate;
+    background: #182128;
+}
+
+.map-raster { filter: grayscale(.75) brightness(.64) contrast(1.04) saturate(.8); }
+
+.court-sidebar {
+    position: absolute;
+    top: clamp(.65rem, 2vw, 1.3rem);
+    left: clamp(.65rem, 2vw, 1.3rem);
+    width: min(20rem, calc(100% - 1.3rem));
+    max-height: calc(100% - 5rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    padding: 1.05rem;
+    border: 1px solid #f8f4ea2a;
+    border-radius: .95rem;
+    background: #161b24f5;
+    box-shadow: 0 .65rem 2.3rem #0b0d137d;
+}
+
+.court-sidebar h1 {
+    margin: 0 0 .9rem;
+    font-size: clamp(1.2rem, 2vw, 1.55rem);
+    letter-spacing: -.03em;
+    line-height: 1.16;
 }
 
 .sport-filters {
     display: flex;
     flex-wrap: wrap;
-    gap: .5rem;
-    margin-bottom: 1rem;
+    gap: .4rem;
+    margin-bottom: .9rem;
 }
 
 .sport-filters button {
     min-height: 2.65rem;
-    padding: .45rem .85rem;
+    padding: .4rem .48rem;
     border: 1px solid var(--line);
-    border-radius: .65rem;
+    border-radius: 2rem;
     color: var(--muted);
     background: #1d2029;
     font-size: .93rem;
@@ -28,31 +78,24 @@
 
 .sport-filters button[aria-pressed="true"] { background: #392b24; }
 
-.court-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(15rem, .45fr);
-    align-items: start;
-    gap: 1rem;
+.court-directory { border-top: 1px solid var(--line); }
+.court-directory summary {
+    padding: .78rem 0 .65rem;
+    font-weight: 700;
+    cursor: pointer;
 }
 
-.map-panel, .court-sidebar {
-    min-width: 0;
-    border: 1px solid #f8f4ea24;
+#court-count:not(:empty) {
+    margin-left: .3rem;
+    padding: .12rem .47rem;
     border-radius: 1rem;
-    background: #1d2029;
+    color: var(--muted);
+    background: #ffffff12;
+    font-size: .78rem;
 }
 
-.map-panel { overflow: hidden; }
-
-#courts-map {
-    height: clamp(26rem, 62vh, 39rem);
-    isolation: isolate;
-    background: #dce1d6;
-}
-
-.court-sidebar { padding: 1rem; }
-.court-sidebar h2 { margin: 0; font-size: 1.25rem; }
-.court-sidebar p { margin: .4rem 0 .85rem; color: var(--muted); }
+.court-sidebar p { margin: .4rem 0 0; color: var(--muted); }
+.court-sidebar p:empty { display: none; }
 .court-list { display: grid; gap: .55rem; margin: 0; padding: 0; list-style: none; }
 
 .court-item {
@@ -71,16 +114,27 @@
 .court-item span { color: var(--muted); font-size: .875rem; overflow-wrap: anywhere; }
 .court-item strong { font-size: .97rem; overflow-wrap: anywhere; }
 
-.tile-status { margin: 0; padding: .65rem .8rem; color: var(--muted); font-size: .9rem; }
+.tile-status {
+    position: absolute;
+    bottom: 2rem;
+    left: .75rem;
+    max-width: min(22rem, calc(100% - 5rem));
+    margin: 0;
+    padding: .65rem .8rem;
+    border-radius: .5rem;
+    color: var(--muted);
+    background: #161b24f5;
+    font-size: .9rem;
+}
 
 .court-pin {
     display: grid;
     place-items: center;
     border: 2px solid #fff5e8;
-    border-radius: 50% 50% 50% 0;
+    border-radius: 50%;
     color: #21170d;
     background: #ffae63;
-    box-shadow: 0 2px 7px #26201d88;
+    box-shadow: 0 0 0 .22rem #ffae6342, 0 .25rem .9rem #0b0d1388;
 }
 
 .court-pin::after {
@@ -91,12 +145,46 @@
     background: currentColor;
 }
 
-.court-popup { width: min(14rem, 60vw); color: #161923; font-size: .9rem; }
-.court-popup h2 { margin: 0 1rem .35rem 0; font-size: 1rem; line-height: 1.3; }
-.court-popup p { margin: .35rem 0; }
-.court-popup a { color: #79431b; font-weight: 650; }
+#courts-map .leaflet-control-zoom { border: 1px solid #ffffff36; border-radius: .65rem; overflow: hidden; }
+#courts-map .leaflet-control-zoom a {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-color: var(--line);
+    color: var(--text);
+    background: #151b23;
+    line-height: 2.5rem;
+}
+#courts-map .leaflet-control-zoom a:hover { color: var(--accent); }
+#courts-map .leaflet-control-attribution { color: #c4cbd5; background: #151b23dc; }
+#courts-map .leaflet-control-attribution a { color: #f2e4d3; }
 
-@media (max-width: 760px) {
-    .court-layout { grid-template-columns: 1fr; }
-    #courts-map { height: clamp(22rem, 55vh, 31rem); }
+#courts-map .leaflet-popup-content-wrapper,
+#courts-map .leaflet-popup-tip { color: var(--text); background: #1a202b; }
+#courts-map .leaflet-popup-close-button { color: var(--muted); }
+.court-popup { width: min(15rem, 65vw); font-size: .9rem; }
+.court-popup h2 { margin: 0 1rem .35rem 0; font-size: 1rem; line-height: 1.3; }
+.court-popup p { margin: .35rem 0; color: var(--muted); }
+#courts-map .court-popup a { color: var(--accent); font-weight: 650; }
+.court-popup-links { display: flex; flex-wrap: wrap; gap: .35rem .8rem; }
+#courts-map .court-popup .court-create-link {
+    display: block;
+    margin-top: .7rem;
+    padding: .45rem .55rem;
+    border-radius: .45rem;
+    color: #482a16;
+    background: #ffe0b7;
+    text-align: center;
+    text-decoration: none;
+}
+#courts-map .court-popup .court-create-link:hover { background: #ffcc8c; }
+
+@media (max-width: 640px) {
+    .map-page .matches-header-inner { flex-wrap: nowrap; }
+    .map-page .signed-in-details { display: none; }
+    .map-main { width: calc(100% - 1rem); padding-top: .7rem; }
+    .map-main .app-navigation { gap: .25rem; }
+    .map-main .app-navigation a { padding: .55rem .5rem; font-size: .83rem; }
+    .map-panel { min-height: 27rem; }
+    .court-sidebar { max-height: min(20rem, 58%); padding: .8rem; }
+    .sport-filters { margin-bottom: .55rem; }
 }

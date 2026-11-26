@@ -2,9 +2,10 @@
     color-scheme: dark;
     font-family: "Segoe UI", system-ui, sans-serif;
     font-synthesis: none;
-    color: #f8f6f2;
+    color: var(--text);
     background: #151820;
     --accent: #ffbf77;
+    --text: #f8f6f2;
     --line: #424750;
     --muted: #bfc5cf;
 }

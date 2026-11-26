@@ -5,6 +5,13 @@
         "latitude": 46.76953,
         "longitude": 23.63397,
         "sports": ["baschet", "fotbal", "tenis"],
+        "openingHours": [
+            {"summer": false, "days": ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY"], "opensAt": "10:00", "closesAt": "20:00"},
+            {"summer": false, "days": ["FRIDAY", "SATURDAY"], "opensAt": "10:00", "closesAt": "21:00"},
+            {"summer": true, "days": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"], "opensAt": "09:00", "closesAt": "22:00"},
+            {"summer": true, "days": ["SATURDAY", "SUNDAY"], "opensAt": "10:00", "closesAt": "22:00"}
+        ],
+        "hoursSource": "https://sportinclujnapoca.ro/",
         "details": "Bază municipală cu terenuri exterioare. Pentru aceste sporturi există rezervare online.",
         "website": "https://sportinclujnapoca.ro/gheorgheni-base"
     },
@@ -14,6 +21,13 @@
         "latitude": 46.74971,
         "longitude": 23.55511,
         "sports": ["baschet", "fotbal", "tenis"],
+        "openingHours": [
+            {"summer": false, "days": ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY"], "opensAt": "10:00", "closesAt": "20:00"},
+            {"summer": false, "days": ["FRIDAY", "SATURDAY"], "opensAt": "10:00", "closesAt": "21:00"},
+            {"summer": true, "days": ["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"], "opensAt": "09:00", "closesAt": "22:00"},
+            {"summer": true, "days": ["SATURDAY", "SUNDAY"], "opensAt": "10:00", "closesAt": "22:00"}
+        ],
+        "hoursSource": "https://sportinclujnapoca.ro/",
         "details": "Bază municipală din Mănăștur cu terenuri pentru baschet, minifotbal și tenis, rezervabile online.",
         "website": "https://sportinclujnapoca.ro/la-terenuri-base"
     },
@@ -23,6 +37,10 @@
         "latitude": 46.76446,
         "longitude": 23.55385,
         "sports": ["tenis"],
+        "openingHours": [
+            {"opensAt": "09:00", "closesAt": "22:00"}
+        ],
+        "hoursSource": "https://winners-sports.com/contact/?lang=ro",
         "details": "Terenuri de tenis pe zgură în incinta Winners Sports Club.",
         "website": "https://winners-sports.com/terenuri/"
     },
@@ -32,7 +50,8 @@
         "latitude": 46.76447,
         "longitude": 23.62956,
         "sports": ["fotbal"],
+        "openingHours": [],
         "details": "Terenuri de fotbal și minifotbal în baza Academiei Viitorul Cluj.",
-        "website": "https://viitorulcluj.ro/contact--fotbal-viitorul-cluj-en.html/"
+        "website": "https://viitorulcluj.ro/"
     }
 ]

@@ -7,11 +7,16 @@ import com.sportbuddy.sportbuddy.dto.UpdateMatchRequest;
 import com.sportbuddy.sportbuddy.model.Match;
 import com.sportbuddy.sportbuddy.service.MatchService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -49,6 +54,21 @@ public class MatchController {
     @GetMapping("/overview")
     public List<MatchOverviewResponse> getMatchOverview() {
         return matchService.getMatchOverview();
+    }
+
+    @GetMapping("/available")
+    public List<MatchOverviewResponse> getAvailableMatches(@AuthenticationPrincipal Jwt principal) {
+        return matchService.getAvailableMatches(Long.valueOf(principal.getSubject()));
+    }
+
+    @GetMapping("/available-slots")
+    public List<LocalTime> getAvailableSlots(
+            @AuthenticationPrincipal Jwt principal,
+            @RequestParam Long fieldId,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
+            @RequestParam @Min(1) @Max(2) int durationHours,
+            @RequestParam(required = false) Long matchId) {
+        return matchService.getAvailableSlots(Long.valueOf(principal.getSubject()), fieldId, date, durationHours, matchId);
     }
 
     @GetMapping("/sport/{sport}")

@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 @Table(name = "matches")
 public class Match {
 
+    public static final int DEFAULT_DURATION_HOURS = 1;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,6 +19,8 @@ public class Match {
 
     @Column(nullable = false)
     private LocalDateTime startTime;
+
+    private Integer durationHours;
 
     @Column(nullable = false)
     private int maxPlayers;
@@ -63,6 +67,14 @@ public class Match {
 
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
+    }
+
+    public int getDurationHours() {
+        return durationHours == null ? DEFAULT_DURATION_HOURS : durationHours;
+    }
+
+    public void setDurationHours(int durationHours) {
+        this.durationHours = durationHours;
     }
 
     public int getMaxPlayers() {

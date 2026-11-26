@@ -26,50 +26,72 @@
         </div>
     </header>
 
-    <main class="matches-main">
+    <main class="matches-main matches-dashboard">
         <nav class="app-navigation" aria-label="Navigare SportBuddy">
-            <a href="/matches.html" aria-current="page">Meciuri</a>
+            <a href="/matches.html" id="all-matches-tab" aria-current="page">Meciuri</a>
+            <a href="/matches.html?view=available" id="available-matches-tab">Meciuri disponibile</a>
             <a href="/map.html">Hartă terenuri</a>
         </nav>
-        <h1>Meciuri</h1>
-
-        <section class="match-create-section" aria-labelledby="create-match-heading">
-            <h2 id="create-match-heading">Creează un meci</h2>
-            <p class="section-intro">Alege sportul, terenul, data și numărul maxim de jucători.</p>
-            <form class="match-create-form" id="match-form">
-                <div class="form-field">
-                    <label for="match-sport">Sport</label>
-                    <select id="match-sport" name="sport" required>
-                        <option value="">Alege sportul</option>
-                    </select>
-                </div>
-                <div class="form-field">
-                    <label for="match-field">Teren</label>
-                    <select id="match-field" name="field" required disabled>
-                        <option value="">Se încarcă terenurile…</option>
-                    </select>
-                    <small class="form-help" id="field-help"></small>
-                </div>
-                <div class="form-field">
-                    <label for="match-start">Data și ora</label>
-                    <input id="match-start" name="startTime" type="datetime-local" required>
-                </div>
-                <div class="form-field">
-                    <label for="match-max-players">Număr maxim de jucători</label>
-                    <input id="match-max-players" name="maxPlayers" type="number" min="2" value="10" required>
-                </div>
-                <button class="primary create-match-button" id="create-match" type="submit">Creează meciul</button>
-            </form>
-            <p class="form-status" id="create-status" role="status" aria-live="polite"></p>
-        </section>
-
-        <p class="action-status" id="match-action-status" role="status" aria-live="polite"></p>
-
-        <div class="matches-message" id="matches-message">
-            <p id="matches-status" role="status">Se încarcă meciurile…</p>
-            <button type="button" class="secondary" id="retry-matches" hidden>Încearcă din nou</button>
+        <div class="matches-heading">
+            <h1 id="matches-heading">Meciuri</h1>
         </div>
-        <ul class="match-list" id="match-list" hidden></ul>
+        <div class="matches-workspace">
+            <section class="match-create-section" aria-labelledby="create-match-heading">
+                <h2 id="create-match-heading" tabindex="-1">Creează un meci</h2>
+                <form class="match-create-form" id="match-form" method="post">
+                    <fieldset class="match-form-fields" id="match-form-fields">
+                        <div class="form-field">
+                            <label for="match-sport">Sport</label>
+                            <select id="match-sport" name="sport" required>
+                                <option value="">Alege sportul</option>
+                            </select>
+                        </div>
+                        <fieldset class="field-picker" aria-describedby="field-help">
+                            <legend>Teren</legend>
+                            <p class="form-help" id="field-help" role="status">Se încarcă terenurile…</p>
+                            <div class="field-options" id="match-field-options"></div>
+                        </fieldset>
+                        <div class="match-time-and-size">
+                            <div class="form-field">
+                                <label for="match-date">Data</label>
+                                <input id="match-date" name="date" type="date" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="match-duration">Durata</label>
+                                <select id="match-duration" name="durationHours" required>
+                                    <option value="1">1 oră</option>
+                                    <option value="2">2 ore</option>
+                                </select>
+                            </div>
+                        </div>
+                        <fieldset class="field-picker" aria-describedby="slot-help">
+                            <legend>Ora de începere</legend>
+                            <p class="form-help" id="slot-help" role="status">Alege terenul și data pentru a vedea orele libere.</p>
+                            <div class="slot-options" id="match-slot-options"></div>
+                        </fieldset>
+                        <div class="form-field match-size">
+                            <label for="match-max-players">Max. jucători</label>
+                            <input id="match-max-players" name="maxPlayers" type="number" min="2" value="10" required>
+                        </div>
+                        <div class="match-form-actions">
+                            <button class="primary create-match-button" id="create-match" type="submit" disabled>Creează meciul</button>
+                            <button class="secondary" id="cancel-match-edit" type="button" hidden>Anulează editarea</button>
+                        </div>
+                    </fieldset>
+                    <p class="form-status" id="create-status" role="status"></p>
+                </form>
+            </section>
+
+            <section class="matches-feed" aria-labelledby="matches-feed-heading">
+                <h2 id="matches-feed-heading">Lista meciurilor</h2>
+                <p class="action-status" id="match-action-status" role="status"></p>
+                <div class="matches-message" id="matches-message">
+                    <p id="matches-status" role="status">Se încarcă meciurile…</p>
+                    <button type="button" class="secondary" id="retry-matches" hidden>Încearcă din nou</button>
+                </div>
+                <ul class="match-list" id="match-list" hidden></ul>
+            </section>
+        </div>
     </main>
 
     <template id="match-template">
@@ -82,7 +104,7 @@
                 </div>
                 <div>
                     <dt>Data și ora</dt>
-                    <dd><time class="match-start"></time></dd>
+                    <dd><time class="match-start"></time><span class="match-end"></span></dd>
                 </div>
                 <div class="match-availability">
                     <dt>Locuri libere</dt>
@@ -94,11 +116,24 @@
                 <ul class="participant-list"></ul>
             </section>
             <div class="match-actions">
-                <button type="button" class="primary match-join">Înscrie-te</button>
-                <button type="button" class="secondary match-leave" hidden>Retrage-te</button>
+                <button type="button" class="primary match-join" data-action="join">Înscrie-te</button>
+                <button type="button" class="secondary match-leave" data-action="leave" hidden>Retrage-te</button>
                 <span class="match-full" hidden>Meci complet</span>
+                <button type="button" class="secondary match-edit" data-action="edit" hidden>Modifică</button>
+                <button type="button" class="secondary danger-button match-delete" data-action="delete" hidden>Șterge</button>
             </div>
         </li>
     </template>
+    <dialog class="match-dialog" id="match-delete-dialog" aria-labelledby="match-delete-heading">
+        <form id="delete-match-form">
+            <h2 id="match-delete-heading">Ștergi acest meci?</h2>
+            <p>Rezervarea va fi eliberată și înscrierile la meci vor fi șterse.</p>
+            <p class="form-status" id="delete-match-status" role="status"></p>
+            <div class="match-dialog-actions">
+                <button type="button" class="secondary" id="cancel-match-delete" autofocus>Păstrează meciul</button>
+                <button type="submit" class="secondary danger-button" id="confirm-match-delete">Șterge meciul</button>
+            </div>
+        </form>
+    </dialog>
 </body>
 </html>
