@@ -32,6 +32,39 @@
             <a href="/map.html">Hartă terenuri</a>
         </nav>
         <h1>Meciuri</h1>
+
+        <section class="match-create-section" aria-labelledby="create-match-heading">
+            <h2 id="create-match-heading">Creează un meci</h2>
+            <p class="section-intro">Alege sportul, terenul, data și numărul maxim de jucători.</p>
+            <form class="match-create-form" id="match-form">
+                <div class="form-field">
+                    <label for="match-sport">Sport</label>
+                    <select id="match-sport" name="sport" required>
+                        <option value="">Alege sportul</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="match-field">Teren</label>
+                    <select id="match-field" name="field" required disabled>
+                        <option value="">Se încarcă terenurile…</option>
+                    </select>
+                    <small class="form-help" id="field-help"></small>
+                </div>
+                <div class="form-field">
+                    <label for="match-start">Data și ora</label>
+                    <input id="match-start" name="startTime" type="datetime-local" required>
+                </div>
+                <div class="form-field">
+                    <label for="match-max-players">Număr maxim de jucători</label>
+                    <input id="match-max-players" name="maxPlayers" type="number" min="2" value="10" required>
+                </div>
+                <button class="primary create-match-button" id="create-match" type="submit">Creează meciul</button>
+            </form>
+            <p class="form-status" id="create-status" role="status" aria-live="polite"></p>
+        </section>
+
+        <p class="action-status" id="match-action-status" role="status" aria-live="polite"></p>
+
         <div class="matches-message" id="matches-message">
             <p id="matches-status" role="status">Se încarcă meciurile…</p>
             <button type="button" class="secondary" id="retry-matches" hidden>Încearcă din nou</button>
@@ -56,6 +89,15 @@
                     <dd><strong class="match-spots"></strong> <span class="match-capacity"></span></dd>
                 </div>
             </dl>
+            <section class="match-participants" aria-label="Participanții la meci">
+                <h3>Participanți <span class="participant-count"></span></h3>
+                <ul class="participant-list"></ul>
+            </section>
+            <div class="match-actions">
+                <button type="button" class="primary match-join">Înscrie-te</button>
+                <button type="button" class="secondary match-leave" hidden>Retrage-te</button>
+                <span class="match-full" hidden>Meci complet</span>
+            </div>
         </li>
     </template>
 </body>
